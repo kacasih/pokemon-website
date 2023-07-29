@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pokemon Code Trading Platform - About Us</title>
+  <link rel="stylesheet" href="/public/main.css">
+  <script src="https://kit.fontawesome.com/37d39e11a5.js" crossorigin="anonymous"></script>    
+  <script src="/public/nextnavigationpagescroll.js"></script> 
+  <script src="/public/frontend.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    /* Add custom CSS for aboutus*/
+    .aboutus-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .aboutus-container h2 {
+      margin-bottom: 20px;
+    }
+    .aboutus-container p {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Welcome to the Pokemon Code Trading Platform</h1>
+    <div class="secondary-nav">
+      <ul class="secondary-nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/aboutus">About Us</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+        <li><a href="/myaccount">My Account</a></li>
+        <li><a href="/sell">Sell</a></li>
+      </ul>
+    </div>
+    <div class="user-links">
+      <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+    </div>
+    <form class="search-form">
+      <div class="search-container">
+        <label for="searchbar" class="search-label">
+          <i class="fas fa-search"></i>
+        </label>
+        <input id="searchbar" onkeyup="filterProducts()" type="text" name="search" placeholder="Search Products..">
+      </div>
+    </form>
+    <div class="nav-wrapper">
+      <nav>
+        <div class="nav-scroller">
+          <button class="nav-scroll-buttons" id="btn-scroll-left" onclick="HorizontalScroll(-1)"><i class="fas fa-chevron-left"></i></button>
+          <div class="link-container">
+            <ul class="nav-links">
+              <% for (var i = 0; i < sections.length; i++) { %>
+              <li><a href="/id=<%= sections[i].id %>" class="nav-link"><%= sections[i].title %></a></li>
+              <% } %>
+            </ul>
+          </div>
+          <button class="nav-scroll-buttons" id="btn-scroll-right" onclick="HorizontalScroll(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="aboutus-container">
+      <h2>About the Pokemon Code Trading Platform</h2>
+      <p>At Pokemon Code Trader, we pride ourselves on offering the best deals on a vast variety of Pokemon codes. Our platform is your one-stop destination for finding the cheapest and most sought-after Pokemon codes in the market.</p>
+      <p>We understand that as a Pokemon enthusiast, you crave the excitement of discovering new codes to enhance your gameplay. That's why our dedicated team is constantly updating our collection with fresh codes, ensuring you'll always find something thrilling and valuable.</p>
+      <p>Join our thriving community of Pokemon lovers today and experience the thrill of trading like never before. Embrace the spirit of adventure, camaraderie, and endless possibilities that await you at Pokemon Code Trader. Get ready to level up your Pokemon journey and catch 'em all!</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-info">
+        <h3>Contact Information</h3>
+        <p>Email: info@pokemoncodetrader.com</p>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Pokemon Code Trader. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+</html>
