@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pokemon Code Trading Platform</title>
+    <link rel="stylesheet" href="/public/main.css">
+    <script src="https://kit.fontawesome.com/37d39e11a5.js" crossorigin="anonymous"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/three@0.114.0/build/three.min.js"></script>
+    <script src="/public/nextnavigationpagescroll.js"></script> 
+    <script src="/public/frontcover.js"></script>
+    <script src="/public/frontend.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="/public/checkout.js"></script>
+
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to the Pokemon Code Trading Platform</h1>
+      <div class="secondary-nav">
+        <ul class="secondary-nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/aboutus">About Us</a></li>
+          <li><a href="/contactus">Contact Us</a></li>
+          <li><a href="/myaccount">My Account</a></li>
+          <li><a href="/sell">Sell</a></li>
+        </ul>
+      </div>
+      <div class="user-links">
+        <a href="/login">Login</a> | <a href="/signup">Sign Up</a>
+      </div>
+      <form class="search-form">
+        <div class="search-container">
+          <label for="searchbar" class="search-label">
+            <i class="fas fa-search"></i>
+          </label>
+          <input id="searchbar" onkeyup="filterProducts()" type="text" name="search" placeholder="Search Products..">
+        </div>
+      </form>
+      <div class="nav-wrapper">
+        <nav>
+            <div class="nav-scroller">
+              <button class="nav-scroll-buttons" id="btn-scroll-left" onclick="HorizontalScroll(-1)"><i class="fas fa-chevron-left"></i></button>
+              <div class="link-container">
+                <ul class="nav-links">
+                  <% for (var i = 0; i < sections.length; i++) { %>
+                  <li><a href="/id=<%= sections[i].id %>" class="nav-link"><%= sections[i].title %></a></li>
+                  <% } %>
+                </ul>
+              </div>
+              <button class="nav-scroll-buttons" id="btn-scroll-right" onclick="HorizontalScroll(1)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </nav>
+      </div>
+    </header>     
+    
+    <% var cartItems = [] %>
+    <main>
+      <div id="cube-container" style="width: 100%; height: 500px;"></div>
+      <section class="selling-codes">
+        <h2>Codes You Might Like</h2>
+        <div id="code-pack-container">
+          <% for (var i = 0; i < codePacks.length; i++) { %>
+            <div class="code-pack">
+              <img src="public/images/packs/jpg/<%= codePacks[i].imgSrc.replace('.png','.jpeg') %>" alt="<%= codePacks[i].title %>">
+              <h3><%= codePacks[i].title %></h3>
+              <p><%= codePacks[i].description %></p>
+              <p><strong>Price:</strong> $<%= codePacks[i].price %></p>
+              <label>
+                <strong>Quantity in stock:</strong> <%= codePacks[i].quantity %></p>
+                <input type="number" min="1" max="<%= codePacks[i].quantity %>" value="1" id="qty-<%= codePacks[i].id %>" class="qty-input" onchange="updateQty('<%= codePacks[i].id %>')">
+                <button onclick="updateQty('<%= codePacks[i].id %>', 'increment')"><strong>+</strong></button>
+                <button onclick="updateQty('<%= codePacks[i].id %>', 'decrement')"><strong>-</strong></button>
+              </label>
+              <button onclick="addToCart('<%= codePacks[i].id %>', '<%= codePacks[i].title %>', '<%= codePacks[i].imgSrc %>', '<%= codePacks[i].price %>', document.querySelector('#qty-<%= codePacks[i].id %>').value)" class="add-to-cart-btn">Add to Cart</button>
+
+            </div>
+          <% } %>
+        </div>
+      </section>
+      <section class="buying-codes">
+        <h2>Sell us your codes!</h2>
+        <div id="code-pack-container-sell">
+        </div>
+      </section>
+    </main>
+    <aside class="side-cart">
+      <button id="cart-icon"><img src="/public/A5B51E92-CD3C-4338-8857-D0D2DB506F8A_4_5005_c.jpeg" alt="Cart Icon"></button>
+      <div id="cart-panel">
+        <h2>Your Cart</h2>
+        <div class="cart-scroll-container">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th class="item-name">Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody id="cart-items">
+            </tbody>
+          </table>
+        </div>
+        <p id="total-text">Total: $<span id="cart-total">0.00</span></p>
+        <div id="cart-buttons">
+          <button id="view-cart-button" class="active" onclick="location.href='/viewcart'">View Cart</button>
+          <button id="checkout-button">Checkout</button>
+        </div>
+      </div>
+      <div id="warning-message">
+        <p>Please add items to your cart to meet the minimum purchase requirement of $ 4.00 USD.</p>
+      </div>
+    </aside>
+    <script src="/public/addtocart.js"></script>
+    <footer>
+      <p>&copy; 2023 Pokemon Trading Platform</p>
+    </footer>
+  </body>
+</html>
